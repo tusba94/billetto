@@ -1,0 +1,115 @@
+<div class="events-page">
+  <!-- Header -->
+<header class="events-header">
+  <div class="events-brand">Billetto</div>
+
+  <div class="events-auth">
+    <% if @signed_in %>
+      <div id="clerk-user-button"></div>
+    <% else %>
+      <a href="<%= auth_path %>" class="sign-in-button">
+        Sign In
+      </a>
+    <% end %>
+  </div>
+</header>
+
+  <!-- Hero -->
+  <section class="events-hero">
+    <p class="events-eyebrow">
+      Discover · Attend · Vote
+    </p>
+
+    <h1>
+      Billetto <span>Events</span>
+    </h1>
+
+    <p>
+      Discover amazing events and share your vote with the community.
+    </p>
+  </section>
+
+  <!-- Events -->
+  <main class="events-grid">
+    <% @events.each do |event| %>
+      <article class="event-card">
+
+        <!-- Event image -->
+        <% if event.image_url.present? %>
+          <img
+            src="<%= event.image_url %>"
+            alt="<%= event.title %>"
+            class="event-image"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+          >
+
+          <div class="event-image-placeholder" style="display: none;">
+            <span>📅</span>
+          </div>
+        <% else %>
+          <div class="event-image-placeholder">
+            <span>📅</span>
+          </div>
+        <% end %>
+
+        <!-- Event content -->
+        <div class="event-content">
+          <h2>
+            <%= event.title %>
+          </h2>
+
+          <p class="event-date">
+            <span class="date-icon">▣</span>
+            <%= event.starts_at.strftime("%d %b %Y, %I:%M %p") %>
+          </p>
+
+          <% if event.description.present? %>
+            <p class="event-description">
+              <%= event.description %>
+            </p>
+          <% end %>
+
+          <!-- Voting -->
+          <div class="event-votes">
+            <button
+            class="vote-button"
+                data-event-id="<%= event.id %>"
+                data-vote="up"
+                <%= "disabled" unless @signed_in %>
+            >
+              <span class="vote-icon">↑</span>
+              Upvote
+              <span class="vote-count">
+                <%= event.upvote_count %>
+              </span>
+            </button>
+            <button
+            class="vote-button"
+                data-event-id="<%= event.id %>"
+                data-vote="down"
+                <%= "disabled" unless @signed_in %>
+                >
+              <span class="vote-icon">↓</span>
+              Downvote
+              <span class="vote-count">
+                <%= event.downvote_count %>
+              </span>
+            </button>
+
+          </div>
+        </div>
+      </article>
+    <% end %>
+  </main>
+
+  <!-- Footer -->
+  <footer class="events-footer">
+    <span>
+      © <%= Time.current.year %> Billetto. Discover. Vote. Be part of the community.
+    </span>
+
+    <span>
+      Built with ❤️ using Ruby on Rails
+    </span>
+  </footer>
+</div>

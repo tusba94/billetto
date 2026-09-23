@@ -1,0 +1,4 @@
+import_billetto_events:
+  cron: "*/5 * * * *"
+  class: "ImportBillettoEventsJob"
+  queue: default
