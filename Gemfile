@@ -66,6 +66,6 @@ group :test do
 end
 gem "rails_event_store", "~> 3.1.0"
 gem "sidekiq"
-gem "json", "~> 2.13"
+gem "json", "~> 3.0"
 gem "clerk-sdk-ruby", require: "clerk"
 gem "sidekiq-cron"
