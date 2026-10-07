@@ -64,7 +64,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-gem "rails_event_store", "~> 3.1.0"
+gem "rails_event_store", "~> 3.2.0"
 gem "sidekiq"
 gem "json", "~> 2.13"
 gem "clerk-sdk-ruby", require: "clerk"
